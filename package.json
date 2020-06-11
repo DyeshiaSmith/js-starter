@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "browser-sync start --server --files '*.html, *.css, *.js'",
+    "server": "nodemon backend/index.mjs",
     "test": "jest"
   },
   "keywords": [],
@@ -21,9 +22,13 @@
     "eslint-plugin-standard": "^4.0.1",
     "htmlhint": "^0.11.0",
     "jest": "^26.0.1",
+    "nodemon": "^2.0.4",
     "standard": "^14.3.3",
     "stylelint": "^13.3.3",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.0.0"
+  },
+  "dependencies": {
+    "formidable": "^1.2.2"
   }
 }
