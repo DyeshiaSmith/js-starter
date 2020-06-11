@@ -7,6 +7,7 @@ import validator from 'express-validator'
 const { body, validationResult } = validator
 
 const app = express()
+app.use(express.urlencoded({ extended: true }))
 
 app.get('*', async ({ url }, res, next) => {
   if (!url.slice(1)) {
