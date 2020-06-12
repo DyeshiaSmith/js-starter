@@ -7,13 +7,13 @@ import validator from 'express-validator'
 const { body, validationResult } = validator
 
 const app = express()
+
 app.use(express.urlencoded({ extended: true }))
 
 app.get('*', async ({ url }, res, next) => {
   if (!url.slice(1)) {
     url = '/index.html'
   }
-
   const HTMLFile = url.includes('.') ? url : `${url}.html`
 
   try {
@@ -22,21 +22,24 @@ app.get('*', async ({ url }, res, next) => {
     next(err)
   }
 })
-
 app.post(
   '*',
   [
-    body('email').isEmail().normalizeEmail(),
-    body(['name', 'fone']).not().isEmpty().trim().escape()
+    body(['name', 'fone']).not().isEmpty().trim().escape(),
+    body('email').isEmail().normalizeEmail()
   ],
+
   (req, res) => {
     const errors = validationResult(req)
-
     if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() })
+      return (
+        res
+          .status(422)
+          .json({ errors: errors.array() })
+      )
     }
-    res.end('<p>Info Submitted!</p>')
+    res.end('<p>Info submitted!</p>')
   }
 )
 
-app.listen(5000)
+app.listen(3000)
