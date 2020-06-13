@@ -7,7 +7,7 @@ function checkInput4Errors (input) {
   const pattern = input.pattern
   const value = input.value.trim()
 
-  return !value.length === 0 || (pattern && !value.match(new RegExp(pattern)))
+  return value.length && (!pattern || value.match(new RegExp(pattern)))
 }
 
 form.addEventListener('submit', function (e) {
@@ -16,6 +16,6 @@ form.addEventListener('submit', function (e) {
 
 inputs.forEach((input) => {
   input.addEventListener('blur', function () {
-    console.log(checkInput4Errors(this))
+    input.nextElementSibling.classList.toggle('hidden', checkInput4Errors(this))
   })
 })
