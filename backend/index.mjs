@@ -1,5 +1,7 @@
 import express from 'express'
 
+import multer from 'multer'
+
 import validator from 'express-validator'
 
 const { body, validationResult } = validator
@@ -16,7 +18,7 @@ app.use(
 // Handle POST requests
 app.post(
   '*',
-  // Express-validator - (https://express-validator.github.io/docs/sanitization.html)
+  multer().none(),
   [
     body(['name', 'fone']).not().isEmpty().trim().escape(),
     body('email').isEmail().normalizeEmail()
