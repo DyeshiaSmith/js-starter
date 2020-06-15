@@ -3,7 +3,6 @@ const form = document.querySelector('form')
 const inputs = Array.from(form.querySelectorAll('input[required]'))
 
 function checkInput4Errors (input) {
-  // 'pattern' will be 'falsy' if there is no pattern
   const pattern = input.pattern
   const value = input.value.trim()
 
@@ -25,7 +24,7 @@ inputs.forEach((input) => {
 form.addEventListener('submit', async function (e) {
   e.preventDefault()
 
-  if (inputs.find(input => !input.classList.contains('success'))) {
+  if (!inputs.find(input => !input.classList.contains('success'))) {
     const res = await window.fetch('', {
       method: 'POST',
       'Content-Type': 'multipart/form-data',
